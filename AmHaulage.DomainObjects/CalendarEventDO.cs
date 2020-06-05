@@ -1,20 +1,15 @@
-// Copyright (c) Adam Mytton. All Rights Reserved.
+﻿// Copyright (c) Adam Mytton. All Rights Reserved.
 
-namespace AmHaulage.Persistent.Entities
+namespace AmHaulage.DomainObjects
 {
     using System;
 
-    public class CalendarEvent
+    public class CalendarEventDO
     {
         /// <summary>
         /// Gets or sets a unique ID that identifies the record.
         /// </summary>
         public long Id { get; set; }
-
-        /// <summary>
-        /// Gets or sets the SQL Server generated timestamp/row version.
-        /// </summary>
-        public byte[] RowVersion { get; set; }
 
         /// <summary>
         /// Gets or sets the ID of the request that created the record.

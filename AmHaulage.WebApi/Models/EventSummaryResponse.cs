@@ -5,10 +5,21 @@ namespace AmHaulage.WebApi.Models
     using System;
     using System.ComponentModel.DataAnnotations;
 
-    public class UpdateEventRequest
+    public class EventSummaryResponse
     {
+        /// <summary>
+        /// Gets or sets a unique ID that identifies the record.
+        /// </summary>
+        public long Id { get; set; }
+
+        /// <summary>
+        /// Gets or sets the summary text for the calendar event.
+        /// </summary>
         public string Summary { get; set; }
 
+        /// <summary>
+        /// Gets or sets the location text for the calendar event.
+        /// </summary>
         public string Location { get; set; }
 
         /// <summary>
@@ -24,6 +35,5 @@ namespace AmHaulage.WebApi.Models
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [DataType(DataType.Date)]
         public DateTime EndDate { get; set; }
-
     }
 }
