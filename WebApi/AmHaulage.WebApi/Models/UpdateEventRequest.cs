@@ -7,8 +7,14 @@ namespace AmHaulage.WebApi.Models
 
     public class UpdateEventRequest
     {
+        /// <summary>
+        /// Gets or sets the summary text for the calendar event.
+        /// </summary>
         public string Summary { get; set; }
 
+        /// <summary>
+        /// Gets or sets the location text for the calendar event.
+        /// </summary>
         public string Location { get; set; }
 
         /// <summary>
@@ -24,6 +30,5 @@ namespace AmHaulage.WebApi.Models
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [DataType(DataType.Date)]
         public DateTime EndDate { get; set; }
-
     }
 }

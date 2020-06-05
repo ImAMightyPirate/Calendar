@@ -50,14 +50,14 @@ namespace AmHaulage.WebApi.Controllers
             }
         }
 
-        [HttpGet("{eventId:long}")]
-        public EventDetailedResponse GetEvent(long eventId)
+        [HttpGet("{calendarEventId:long}")]
+        public EventDetailedResponse GetEvent(long calendarEventId)
         {
             CalendarEventDO domainObject;
 
             try
             {
-                domainObject = this.eventReaderService.GetCalendarEvent(eventId);
+                domainObject = this.eventReaderService.GetCalendarEvent(calendarEventId);
             }
             catch (RecordNotFoundException)
             {
@@ -99,11 +99,11 @@ namespace AmHaulage.WebApi.Controllers
             return this.Accepted();
         }
 
-        [HttpPut("{eventId:long}")]
-        public IActionResult UpdateEvent(long eventId, [FromBody]UpdateEventRequest request)
+        [HttpPut("{calendarEventId:long}")]
+        public IActionResult UpdateEvent(long calendarEventId, [FromBody]UpdateEventRequest request)
         {
             this.eventUpdaterService.UpdateCalendarEvent(
-                eventId, 
+                calendarEventId, 
                 request.Summary, 
                 request.Location,
                 request.StartDate,
@@ -112,10 +112,10 @@ namespace AmHaulage.WebApi.Controllers
             return this.Accepted();
         }
 
-        [HttpDelete("{eventId:long}")]
-        public IActionResult DeleteEvent(long eventId)
+        [HttpDelete("{calendarEventId:long}")]
+        public IActionResult DeleteEvent(long calendarEventId)
         {
-            this.eventDeleterService.DeleteCalendarEvent(eventId);
+            this.eventDeleterService.DeleteCalendarEvent(calendarEventId);
             return this.Accepted();
         }
     }

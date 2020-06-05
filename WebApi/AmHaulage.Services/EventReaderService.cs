@@ -13,12 +13,15 @@ namespace AmHaulage.Services
     using EnsureThat;
     using Microsoft.Extensions.Logging;
 
+    /// <summary>
+    /// Service with responsibility for reading calendar events.
+    /// </summary>
     public class EventReaderService : IEventReaderService
     {
         private readonly ILogger logger;
 
         /// <summary>
-        /// Initialises a new instance of the <see cref="EventReaderService" /> class.
+        /// Initializes a new instance of the <see cref="EventReaderService" /> class.
         /// </summary>
         /// <param name="logger">The ASP.NET Core logger.</param>
         public EventReaderService(ILogger<EventReaderService> logger)
@@ -26,6 +29,12 @@ namespace AmHaulage.Services
             this.logger = logger;
         }
 
+        /// <summary>
+        /// Gets a calendar event by its ID.
+        /// </summary>
+        /// <param name="calendarEventId">The calendar event ID.</param>
+        /// <returns>The calendar event.</returns>
+        /// <exception cref="RecordNotFoundException">Thrown if no calendar event for the ID is found.</exception>
         public CalendarEventDO GetCalendarEvent(long calendarEventId)
         {
             EnsureArg.IsGte(calendarEventId, 1);
@@ -46,6 +55,12 @@ namespace AmHaulage.Services
             }
         }
 
+        /// <summary>
+        /// Gets all calendar events within a month that have not been deleted.
+        /// </summary>
+        /// <param name="year">The year.</param>
+        /// <param name="month">The month (indexed by 1).</param>
+        /// <returns>The calendar events within the time period.</returns>
         public IEnumerable<CalendarEventDO> GetCalendarEvents(int year, int month)
         {
             EnsureArg.IsGte(month, 1, nameof(month));
@@ -60,15 +75,15 @@ namespace AmHaulage.Services
                 var records = context.CalendarEvents
                     .Where(
                         e =>
-                            e.IsDeleted == false &&   
+                            e.IsDeleted == false &&
                             (
-                                // Event starts within the month
+                                /* Event starts within the month */
                                 (e.StartDate.Date >= monthStartDate.Date && e.StartDate.Date <= monthEndDate.Date) ||
 
-                                // Event ends within the month
+                                /* Event ends within the month */
                                 (e.EndDate.Date >= monthStartDate.Date && e.EndDate.Date <= monthEndDate.Date) ||
 
-                                // Event spans the entire month
+                                /* Event spans the entire month */
                                 (e.StartDate.Date < monthStartDate.Date && e.EndDate.Date > monthEndDate.Date)
                             )
                     );
