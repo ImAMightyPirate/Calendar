@@ -18,13 +18,13 @@ export class MonthGridComponent implements OnInit {
 
         // Set the month contents using the current active date
         const initialActiveDate = this.monthPickerService.getActiveDate();
-        this.calendarWeeks = this.calendarEventService.getEventsForMonth(initialActiveDate);
+        this.calendarWeeks = this.calendarEventService.getCalendarEventsForMonth(initialActiveDate);
 
         // Subscribe to changes in the active date and update contents of
         // the month
         this.monthPickerService.activeDateChanged$.subscribe(
           activeDate => {
-            this.calendarWeeks = this.calendarEventService.getEventsForMonth(activeDate);
+            this.calendarWeeks = this.calendarEventService.getCalendarEventsForMonth(activeDate);
           });
    }
 

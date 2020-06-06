@@ -1,18 +1,8 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { CalendarApiService } from './calendar-api.service';
 import { DateService } from './date.service';
 import { CalendarWeek } from '../models/calendar-week.model';
 import { CalendarEvent } from '../models/calendar-event.model';
-
-const baseUrl = 'https://localhost:5001/v1.0/calendar/events/';
-
-export interface EventResponse {
-  id: number;
-  summary: string;
-  location: string;
-  startDate: string;
-  endDate: string;
-}
 
 @Injectable({
   providedIn: 'root'
@@ -20,33 +10,33 @@ export interface EventResponse {
 export class CalendarEventService {
 
   constructor(
-    private http: HttpClient,
+    private calendarApiService: CalendarApiService,
     private dateService: DateService) { }
 
-  public getEventsForMonth(date: Date): CalendarWeek[] {
+  /**
+   * Gets the calendar events for a given month.
+   * @param date A date that falls within the month to be evaluated.
+   */
+  public getCalendarEventsForMonth(date: Date): CalendarWeek[] {
 
     // Get the calendar weeks in the month
     const calendarWeeks = this.dateService.getCalendarWeeksForMonth(date);
 
-    // Get the month and year
-    const year = this.dateService.getYear(date);
-    const month = this.dateService.getMonth(date);
-
-    const fullUrl = baseUrl + year + '/' + month;
-
-    this.http
-      .get<EventResponse[]>(fullUrl)
+    this.calendarApiService
+      .getCalendarEventsForMonth(date)
       .subscribe(events =>
         {
-          console.log(events);
-
           for (const calendarWeek of calendarWeeks) {
             for (const day of calendarWeek.daysInWeek) {
+
+              // No matching required if the day in the calendar is only
+              // provided for padding
               if (day.isPaddingDay) {
                 continue;
               }
+
               for (const event of events) {
-                if (this.isDateInRange(day.date, event.startDate, event.endDate)) {
+                if (this.isCalendarDateInRange(day.date, event.startDate, event.endDate)) {
                   const calendarEvent = new CalendarEvent();
                   calendarEvent.id = event.id;
                   calendarEvent.summary = event.summary;
@@ -61,7 +51,13 @@ export class CalendarEventService {
     return calendarWeeks;
   }
 
-  private isDateInRange(calendarDate: Date, eventStartDate: string, eventEndDate: string): boolean {
+  /**
+   * Determines whether the calendar date falls within the range of an event's date range.
+   * @param calendarDate The calendar date.
+   * @param eventStartDate The event start date.
+   * @param eventEndDate The event end date.
+   */
+  private isCalendarDateInRange(calendarDate: Date, eventStartDate: string, eventEndDate: string): boolean {
 
     const calendarTime = calendarDate.getTime();
     const eventStartTime = new Date(eventStartDate).getTime();
