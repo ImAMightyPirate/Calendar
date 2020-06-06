@@ -4,9 +4,9 @@
 <mat-toolbar color="accent">
   <mat-toolbar-row>
     <button mat-flat-button color="primary">New Appointment</button>
-    <button mat-flat-button color="primary">Previous Month</button>
-    <button mat-flat-button color="primary">Next Month</button>
+    <app-month-picker></app-month-picker>
   </mat-toolbar-row>
 </mat-toolbar>
+<app-month-grid></app-month-grid>
 
 <router-outlet></router-outlet>

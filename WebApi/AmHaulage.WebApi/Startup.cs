@@ -33,6 +33,19 @@ namespace AmHaulage.WebApi
             services.AddSingleton<IEventUpdaterService, EventUpdaterService>();
 
             // Register services required to support API versioning
+            services.AddCors(options =>
+            {
+                options.AddPolicy(
+                    name: "AllowAll",
+                    builder =>
+                    {
+                        builder
+                            .AllowAnyOrigin()
+                            .AllowAnyMethod()
+                            .AllowAnyHeader();
+                    });
+            });
+
             services.AddMvcCore();
             services.AddApiVersioning(
                 o =>
@@ -80,14 +93,13 @@ namespace AmHaulage.WebApi
             }
 
             app.UseHttpsRedirection();
-
             app.UseRouting();
-
+            app.UseCors("AllowAll");
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllers();
+                endpoints.MapControllers().RequireCors("AllowAll");
             });
         }
     }
