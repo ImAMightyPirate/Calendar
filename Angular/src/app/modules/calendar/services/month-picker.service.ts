@@ -59,4 +59,13 @@ export class MonthPickerService {
     // Notify any subscribers that the active date has changed
     this.activeDateChangedSource.next(this.getActiveDate());
   }
+
+  /**
+   * Forces a refresh by notifying subscribers of a change to the active date.
+   */
+  public forceRefresh(): void {
+
+    // Notify any subscribers that the active date has changed
+    this.activeDateChangedSource.next(this.getActiveDate());
+  }
 }

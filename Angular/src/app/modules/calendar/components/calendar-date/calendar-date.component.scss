@@ -21,6 +21,7 @@ mat-card-header {
   background-color: mat-color($candy-app-accent);
   border-radius: 2px;
   color: mat-color($candy-app-accent-text);
+  cursor: pointer;
   display: flex;
   flex-direction: column;
   margin-bottom: 2px;

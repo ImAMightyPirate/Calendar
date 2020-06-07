@@ -17,7 +17,10 @@ export class CalendarMonthComponent implements OnInit {
   public onNewAppointmentClick(): void {
     const dialogRef = this.matDialog.open(
       EventDialogComponent,
-      { width: '400px' });
+      {
+        data: { calendarEventId: null },
+        width: '400px',
+      });
   }
 
 }

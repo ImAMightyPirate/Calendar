@@ -30,7 +30,7 @@
   </mat-form-field>
 </div>
 <div mat-dialog-actions>
-  <button mat-flat-button mat-dialog-close color="primary" [disabled]="!eventForm.valid" (click)="onSave()">Save</button>
-  <button mat-flat-button mat-dialog-close color="primary" *ngIf="isDeleteButtonVisible">Delete</button>
+  <button mat-flat-button mat-dialog-close color="primary" [disabled]="!eventForm.valid" (click)="onSaveClick()">Save</button>
+  <button mat-flat-button mat-dialog-close color="primary" *ngIf="isDeleteButtonVisible" (click)="onDeleteClick()">Delete</button>
   <button mat-button mat-dialog-close>Cancel</button>
 </div>
