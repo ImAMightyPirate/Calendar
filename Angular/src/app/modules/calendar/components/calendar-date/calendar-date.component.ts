@@ -1,5 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { CalendarDay } from '../../models/calendar-day.model';
+import { EventDialogComponent } from '../event-dialog/event-dialog.component';
 
 @Component({
   selector: 'app-calendar-date',
@@ -10,9 +12,13 @@ export class CalendarDateComponent implements OnInit {
 
   @Input() day: CalendarDay;
 
-  constructor() { }
+  constructor(public matDialog: MatDialog) { }
 
   ngOnInit(): void {
+  }
+
+  isDayHidden(): boolean {
+    return this.day.isPaddingDay;
   }
 
   /**
@@ -35,6 +41,16 @@ export class CalendarDateComponent implements OnInit {
     }
 
     return '';
+  }
+
+  onEventClicked(calendarEventId: number): void {
+
+    const dialogRef = this.matDialog.open(
+      EventDialogComponent,
+      {
+        data: { calendarEventId },
+        width: '400px',
+      });
   }
 
 }

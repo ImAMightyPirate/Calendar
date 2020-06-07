@@ -1,11 +1,11 @@
-<mat-card [style.visibility]=" day.isPaddingDay ? 'hidden' : 'visible' ">
+<mat-card [style.visibility]="isDayHidden() ? 'hidden' : 'visible' ">
   <mat-card-header>
     <mat-card-title>{{getDayOfMonth()}}</mat-card-title>
     <mat-card-subtitle>{{getDayName()}}</mat-card-subtitle>
   </mat-card-header>
   <mat-card-content>
     <div class="event-container">
-      <div *ngFor="let event of day.eventsOnDay" class="event">
+      <div *ngFor="let event of day.eventsOnDay" class="event" (click)="onEventClicked(event.id)">
         <div class="event-summary">{{event.summary}}</div>
         <div class="event-location">{{event.location}}</div>
       </div>
