@@ -1,12 +1,16 @@
 <mat-toolbar color="primary">
-  <mat-toolbar-row>AM Haulage Ltd</mat-toolbar-row>
-</mat-toolbar>
-<mat-toolbar color="accent">
   <mat-toolbar-row>
-    <button mat-flat-button color="primary">New Appointment</button>
-    <app-month-picker></app-month-picker>
+    <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+      <mat-icon>more_vert</mat-icon>
+    </button>
+    <span>AM Haulage Ltd</span>
   </mat-toolbar-row>
 </mat-toolbar>
-<app-month-grid></app-month-grid>
-
 <router-outlet></router-outlet>
+
+<mat-menu #menu="matMenu">
+  <button mat-menu-item routerLink="/calendar">
+    <mat-icon>calendar_today</mat-icon>
+    <span>Calendar</span>
+  </button>
+</mat-menu>

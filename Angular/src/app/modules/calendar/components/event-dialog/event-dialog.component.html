@@ -1,1 +1,28 @@
-<p>event-dialog works!</p>
+<h1 mat-dialog-title>{{getDialogTitle()}}</h1>
+<div mat-dialog-content>
+  <mat-form-field>
+    <mat-label>Summary</mat-label>
+    <input matInput [(ngModel)]="summary">
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Location</mat-label>
+    <input matInput [(ngModel)]="location">
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Start Date</mat-label>
+    <input matInput [matDatepicker]="startDatePicker" [(ngModel)]="startDate">
+    <mat-datepicker-toggle matSuffix [for]="startDatePicker"></mat-datepicker-toggle>
+    <mat-datepicker #startDatePicker [startAt]="startDate"></mat-datepicker>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>End Date</mat-label>
+    <input matInput [matDatepicker]="endDatePicker" [(ngModel)]="endDate">
+    <mat-datepicker-toggle matSuffix [for]="endDatePicker"></mat-datepicker-toggle>
+    <mat-datepicker #endDatePicker [startAt]="endDate"></mat-datepicker>
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button mat-dialog-close>Save</button>
+  <button mat-button mat-dialog-close>Delete</button>
+  <button mat-button mat-dialog-close>Cancel</button>
+</div>

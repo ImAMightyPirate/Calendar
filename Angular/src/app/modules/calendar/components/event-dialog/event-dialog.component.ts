@@ -7,9 +7,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EventDialogComponent implements OnInit {
 
+  summary: string;
+  location: string;
+  startDate: Date;
+  endDate: Date;
+
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  getDialogTitle(): string {
+    return 'New Appointment';
   }
 
 }
