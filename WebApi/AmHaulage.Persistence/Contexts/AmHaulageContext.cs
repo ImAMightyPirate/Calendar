@@ -2,12 +2,14 @@
 
 namespace AmHaulage.Persistent.Contexts
 {
+    using System.Diagnostics.CodeAnalysis;
     using AmHaulage.Persistent.Entities;
     using Microsoft.EntityFrameworkCore;
 
     /// <summary>
     /// The EF Core database context.
     /// </summary>
+    [ExcludeFromCodeCoverage]
     public class AmHaulageContext : DbContext
     {
         /// <summary>

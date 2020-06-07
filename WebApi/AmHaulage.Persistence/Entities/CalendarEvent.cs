@@ -3,10 +3,12 @@
 namespace AmHaulage.Persistent.Entities
 {
     using System;
+    using System.Diagnostics.CodeAnalysis;
 
     /// <summary>
     /// Entity for the calendar event.
     /// </summary>
+    [ExcludeFromCodeCoverage]
     public class CalendarEvent
     {
         /// <summary>

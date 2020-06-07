@@ -2,6 +2,7 @@
 
 namespace AmHaulage.WebApi
 {
+    using System.Diagnostics.CodeAnalysis;
     using Microsoft.AspNetCore.Mvc.ApiExplorer;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Options;
@@ -11,6 +12,7 @@ namespace AmHaulage.WebApi
     /// <summary>
     /// Configuration for Swagger.
     /// </summary>
+    [ExcludeFromCodeCoverage]
     public class ConfigureSwaggerOptions : IConfigureOptions<SwaggerGenOptions>
     {
         private readonly IApiVersionDescriptionProvider provider;

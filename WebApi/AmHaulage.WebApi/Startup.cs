@@ -2,6 +2,7 @@
 
 namespace AmHaulage.WebApi
 {
+    using System.Diagnostics.CodeAnalysis;
     using AmHaulage.Services;
     using AmHaulage.Services.Contracts;
     using Microsoft.AspNetCore.Builder;
@@ -18,6 +19,7 @@ namespace AmHaulage.WebApi
     /// Startup is responsible for initializing services that will be used
     /// in the ASP.NET Core application.
     /// </summary>
+    [ExcludeFromCodeCoverage]
     public class Startup
     {
         /// <summary>

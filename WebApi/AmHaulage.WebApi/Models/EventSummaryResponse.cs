@@ -4,10 +4,12 @@ namespace AmHaulage.WebApi.Models
 {
     using System;
     using System.ComponentModel.DataAnnotations;
+    using System.Diagnostics.CodeAnalysis;
 
     /// <summary>
     /// Represents a response with the summary of a calendar event.
     /// </summary>
+    [ExcludeFromCodeCoverage]
     public class EventSummaryResponse
     {
         /// <summary>

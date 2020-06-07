@@ -4,10 +4,12 @@ namespace AmHaulage.WebApi.Models
 {
     using System;
     using System.ComponentModel.DataAnnotations;
+    using System.Diagnostics.CodeAnalysis;
 
     /// <summary>
     /// Represents a request to update an existing calendar event.
     /// </summary>
+    [ExcludeFromCodeCoverage]
     public class UpdateEventRequest
     {
         /// <summary>

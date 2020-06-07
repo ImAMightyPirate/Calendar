@@ -3,10 +3,12 @@
 namespace AmHaulage.DomainObjects
 {
     using System;
+    using System.Diagnostics.CodeAnalysis;
 
     /// <summary>
     /// Domain object that represents a calendar event.
     /// </summary>
+    [ExcludeFromCodeCoverage]
     public class CalendarEventDO
     {
         /// <summary>
