@@ -1,3 +1,7 @@
-<button mat-flat-button color="primary" (click)="showPreviousMonth()">Previous Month</button>
+<button mat-icon-button aria-label="Previous Month" color="primary" (click)="showPreviousMonth()">
+  <mat-icon>arrow_left</mat-icon>
+</button>
 <span class="activeMonth">{{activeMonth}}</span>
-<button mat-flat-button color="primary" (click)="showNextMonth()">Next Month</button>
+<button mat-icon-button aria-label="Next Month" color="primary" (click)="showNextMonth()">
+  <mat-icon>arrow_right</mat-icon>
+</button>

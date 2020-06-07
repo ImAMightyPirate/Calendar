@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { EventDialogComponent } from '../event-dialog/event-dialog.component';
 
 @Component({
   selector: 'app-calendar-month',
@@ -7,9 +9,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CalendarMonthComponent implements OnInit {
 
-  constructor() { }
+  constructor(public matDialog: MatDialog) { }
 
   ngOnInit(): void {
+  }
+
+  public openEventDialog(): void {
+    const dialogRef = this.matDialog.open(
+      EventDialogComponent,
+      { width: '400px' });
   }
 
 }

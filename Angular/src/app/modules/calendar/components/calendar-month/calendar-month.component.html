@@ -1,7 +1,8 @@
 <mat-toolbar color="accent">
   <mat-toolbar-row>
-    <button mat-flat-button color="primary">New Appointment</button>
     <app-month-picker></app-month-picker>
+    <span class="spacer"></span>
+    <button mat-flat-button color="primary" (click)="openEventDialog()">New Appointment</button>
   </mat-toolbar-row>
 </mat-toolbar>
 <app-month-grid></app-month-grid>

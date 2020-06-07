@@ -1,28 +1,36 @@
-<h1 mat-dialog-title>{{getDialogTitle()}}</h1>
+<h1 mat-dialog-title>{{dialogTitle}}</h1>
 <div mat-dialog-content>
-  <mat-form-field>
+  <mat-form-field hintLabel="Max 255 characters" style="width: 100%;">
     <mat-label>Summary</mat-label>
-    <input matInput [(ngModel)]="summary">
+    <input matInput required maxlength="255" [formControl]="summary">
+    <mat-hint align="end">{{summary?.value?.length || 0}}/255</mat-hint>
   </mat-form-field>
-  <mat-form-field>
+  <br>
+  <br>
+  <mat-form-field hintLabel="Max 255 characters" style="width: 100%;">
     <mat-label>Location</mat-label>
-    <input matInput [(ngModel)]="location">
+    <input matInput required maxlength="255" [formControl]="location">
+    <mat-hint align="end">{{location?.value?.length || 0}}/255</mat-hint>
   </mat-form-field>
-  <mat-form-field>
+  <br>
+  <br>
+  <mat-form-field style="width: 100%;">
     <mat-label>Start Date</mat-label>
-    <input matInput [matDatepicker]="startDatePicker" [(ngModel)]="startDate">
+    <input matInput required [matDatepicker]="startDatePicker" [formControl]="startDate" (ngModelChange)="onStartDateChanged()">
     <mat-datepicker-toggle matSuffix [for]="startDatePicker"></mat-datepicker-toggle>
     <mat-datepicker #startDatePicker [startAt]="startDate"></mat-datepicker>
   </mat-form-field>
-  <mat-form-field>
+  <br>
+  <br>
+  <mat-form-field style="width: 100%;">
     <mat-label>End Date</mat-label>
-    <input matInput [matDatepicker]="endDatePicker" [(ngModel)]="endDate">
+    <input matInput required [matDatepicker]="endDatePicker" [formControl]="endDate" [min]="startDate.value">
     <mat-datepicker-toggle matSuffix [for]="endDatePicker"></mat-datepicker-toggle>
     <mat-datepicker #endDatePicker [startAt]="endDate"></mat-datepicker>
   </mat-form-field>
 </div>
 <div mat-dialog-actions>
-  <button mat-button mat-dialog-close>Save</button>
-  <button mat-button mat-dialog-close>Delete</button>
+  <button mat-flat-button mat-dialog-close color="primary" [disabled]="!eventForm.valid" (click)="onSave()">Save</button>
+  <button mat-flat-button mat-dialog-close color="primary" *ngIf="isDeleteButtonVisible">Delete</button>
   <button mat-button mat-dialog-close>Cancel</button>
 </div>

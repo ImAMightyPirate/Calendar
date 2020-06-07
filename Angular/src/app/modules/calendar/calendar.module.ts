@@ -1,11 +1,14 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatMomentDateModule } from '@angular/material-moment-adapter';
 import { MatDialogModule } from '@angular/material/dialog';
-import { MatFormFieldModule} from '@angular/material/form-field';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
 import { MatToolbarModule} from '@angular/material/toolbar';
 import { MonthPickerComponent } from './components/month-picker/month-picker.component';
 import { CalendarDateComponent } from './components/calendar-date/calendar-date.component';
@@ -26,11 +29,15 @@ import { CalendarMonthComponent } from './components/calendar-month/calendar-mon
   imports: [
     CommonModule,
     FormsModule,
+    ReactiveFormsModule,
     MatButtonModule,
     MatCardModule,
     MatDatepickerModule,
+    MatMomentDateModule,
     MatDialogModule,
     MatFormFieldModule,
+    MatIconModule,
+    MatInputModule,
     MatToolbarModule,
   ],
   exports: [
