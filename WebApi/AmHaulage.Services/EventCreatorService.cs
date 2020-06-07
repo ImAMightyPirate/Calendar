@@ -11,12 +11,15 @@ namespace AmHaulage.Services
     using EnsureThat;
     using Microsoft.Extensions.Logging;
 
+    /// <summary>
+    /// Service with responsibility for creating calendar events.
+    /// </summary>
     public class EventCreatorService : IEventCreatorService
     {
         private readonly ILogger logger;
 
         /// <summary>
-        /// Initialises a new instance of the <see cref="EventCreatorService" /> class.
+        /// Initializes a new instance of the <see cref="EventCreatorService" /> class.
         /// </summary>
         /// <param name="logger">The ASP.NET Core logger.</param>
         public EventCreatorService(ILogger<EventCreatorService> logger)
@@ -24,6 +27,11 @@ namespace AmHaulage.Services
             this.logger = logger;
         }
 
+        /// <summary>
+        /// Creates a new calendar event.
+        /// </summary>
+        /// <param name="calendarEvent">The calendar event details.</param>
+        /// <exception cref="DuplicateRequestException">Exception thrown when the request has been made multiple times.</exception>
         public void CreateCalendarEvent(CalendarEventDO calendarEvent)
         {
             EnsureArg.IsNotNull(calendarEvent, nameof(calendarEvent));

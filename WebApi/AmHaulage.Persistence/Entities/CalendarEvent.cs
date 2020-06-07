@@ -4,6 +4,9 @@ namespace AmHaulage.Persistent.Entities
 {
     using System;
 
+    /// <summary>
+    /// Entity for the calendar event.
+    /// </summary>
     public class CalendarEvent
     {
         /// <summary>
@@ -46,7 +49,7 @@ namespace AmHaulage.Persistent.Entities
         public DateTime EndDate { get; set; }
 
         /// <summary>
-        /// Gets or sets a value indcating whether the calendar event has been deleted.
+        /// Gets or sets a value indicating whether the calendar event has been deleted.
         /// </summary>
         public bool IsDeleted { get; set; }
     }

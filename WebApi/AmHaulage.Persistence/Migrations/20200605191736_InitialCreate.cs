@@ -1,10 +1,19 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
+﻿// Copyright (c) Adam Mytton. All Rights Reserved.
 
 namespace AmHaulage.Persistence.Migrations
 {
+    using System;
+    using Microsoft.EntityFrameworkCore.Migrations;
+
+    /// <summary>
+    /// Migrations for the initial creation of the database.
+    /// </summary>
     public partial class InitialCreate : Migration
     {
+        /// <summary>
+        /// The upgrade migration.
+        /// </summary>
+        /// <param name="migrationBuilder">The migration builder.</param>
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.EnsureSchema(
@@ -23,7 +32,7 @@ namespace AmHaulage.Persistence.Migrations
                     Location = table.Column<string>(maxLength: 255, nullable: false),
                     StartDate = table.Column<DateTime>(type: "DATE", nullable: false),
                     EndDate = table.Column<DateTime>(type: "DATE", nullable: false),
-                    IsDeleted = table.Column<bool>(nullable: false)
+                    IsDeleted = table.Column<bool>(nullable: false),
                 },
                 constraints: table =>
                 {
@@ -38,6 +47,10 @@ namespace AmHaulage.Persistence.Migrations
                 unique: true);
         }
 
+        /// <summary>
+        /// The downgrade migration.
+        /// </summary>
+        /// <param name="migrationBuilder">The migration builder.</param>
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(

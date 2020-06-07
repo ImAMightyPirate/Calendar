@@ -4,6 +4,9 @@ namespace AmHaulage.DomainObjects
 {
     using System;
 
+    /// <summary>
+    /// Domain object that represents a calendar event.
+    /// </summary>
     public class CalendarEventDO
     {
         /// <summary>
@@ -41,7 +44,7 @@ namespace AmHaulage.DomainObjects
         public DateTime EndDate { get; set; }
 
         /// <summary>
-        /// Gets or sets a value indcating whether the calendar event has been deleted.
+        /// Gets or sets a value indicating whether the calendar event has been deleted.
         /// </summary>
         public bool IsDeleted { get; set; }
     }

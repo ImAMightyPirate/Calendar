@@ -5,8 +5,18 @@ namespace AmHaulage.WebApi.Models
     using System;
     using System.ComponentModel.DataAnnotations;
 
+    /// <summary>
+    /// Represents a request to create a new calendar event.
+    /// </summary>
     public class CreateEventRequest
     {
+        /// <summary>
+        /// Gets or sets the ID of the request that created the record.
+        /// </summary>
+        /// <remarks>
+        /// This is used to ensure that any HTTP request to create a record is
+        /// idempotent (and does not result in multiple calendar events being created).
+        /// </remarks>
         public Guid RequestId { get; set; }
 
         /// <summary>

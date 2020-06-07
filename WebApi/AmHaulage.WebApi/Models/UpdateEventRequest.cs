@@ -5,6 +5,9 @@ namespace AmHaulage.WebApi.Models
     using System;
     using System.ComponentModel.DataAnnotations;
 
+    /// <summary>
+    /// Represents a request to update an existing calendar event.
+    /// </summary>
     public class UpdateEventRequest
     {
         /// <summary>

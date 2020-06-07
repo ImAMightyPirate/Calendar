@@ -75,18 +75,16 @@ namespace AmHaulage.Services
                 var records = context.CalendarEvents
                     .Where(
                         e =>
-                            e.IsDeleted == false &&
-                            (
-                                /* Event starts within the month */
-                                (e.StartDate.Date >= monthStartDate.Date && e.StartDate.Date <= monthEndDate.Date) ||
+                            e.IsDeleted == false && (
 
-                                /* Event ends within the month */
-                                (e.EndDate.Date >= monthStartDate.Date && e.EndDate.Date <= monthEndDate.Date) ||
+                            /* Event starts within the month */
+                            (e.StartDate.Date >= monthStartDate.Date && e.StartDate.Date <= monthEndDate.Date) ||
 
-                                /* Event spans the entire month */
-                                (e.StartDate.Date < monthStartDate.Date && e.EndDate.Date > monthEndDate.Date)
-                            )
-                    );
+                            /* Event ends within the month */
+                            (e.EndDate.Date >= monthStartDate.Date && e.EndDate.Date <= monthEndDate.Date) ||
+
+                            /* Event spans the entire month */
+                            (e.StartDate.Date < monthStartDate.Date && e.EndDate.Date > monthEndDate.Date)));
 
                 foreach (var record in records)
                 {

@@ -5,6 +5,9 @@ namespace AmHaulage.WebApi.Models
     using System;
     using System.ComponentModel.DataAnnotations;
 
+    /// <summary>
+    /// Represents a response with the summary of a calendar event.
+    /// </summary>
     public class EventSummaryResponse
     {
         /// <summary>
