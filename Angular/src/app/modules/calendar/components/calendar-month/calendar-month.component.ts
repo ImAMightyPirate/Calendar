@@ -14,8 +14,14 @@ export class CalendarMonthComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  /**
+   * Triggered the the user clicks on the new appointment button.
+   */
   public onNewAppointmentClick(): void {
-    const dialogRef = this.matDialog.open(
+
+    // Supply a null ID for the calendar event to the dialog
+    // (as there is none yet in the context of a new event).
+    this.matDialog.open(
       EventDialogComponent,
       {
         data: { calendarEventId: null },

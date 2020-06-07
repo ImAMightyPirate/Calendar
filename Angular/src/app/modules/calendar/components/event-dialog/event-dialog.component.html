@@ -1,20 +1,20 @@
 <h1 mat-dialog-title>{{dialogTitle}}</h1>
 <div mat-dialog-content>
-  <mat-form-field hintLabel="Max 255 characters" style="width: 100%;">
+  <mat-form-field hintLabel="Max 255 characters">
     <mat-label>Summary</mat-label>
     <input matInput required maxlength="255" [formControl]="summary">
     <mat-hint align="end">{{summary?.value?.length || 0}}/255</mat-hint>
   </mat-form-field>
   <br>
   <br>
-  <mat-form-field hintLabel="Max 255 characters" style="width: 100%;">
+  <mat-form-field hintLabel="Max 255 characters">
     <mat-label>Location</mat-label>
     <input matInput required maxlength="255" [formControl]="location">
     <mat-hint align="end">{{location?.value?.length || 0}}/255</mat-hint>
   </mat-form-field>
   <br>
   <br>
-  <mat-form-field style="width: 100%;">
+  <mat-form-field>
     <mat-label>Start Date</mat-label>
     <input matInput required [matDatepicker]="startDatePicker" [formControl]="startDate" (ngModelChange)="onStartDateChanged()">
     <mat-datepicker-toggle matSuffix [for]="startDatePicker"></mat-datepicker-toggle>
@@ -22,7 +22,7 @@
   </mat-form-field>
   <br>
   <br>
-  <mat-form-field style="width: 100%;">
+  <mat-form-field>
     <mat-label>End Date</mat-label>
     <input matInput required [matDatepicker]="endDatePicker" [formControl]="endDate" [min]="startDate.value">
     <mat-datepicker-toggle matSuffix [for]="endDatePicker"></mat-datepicker-toggle>

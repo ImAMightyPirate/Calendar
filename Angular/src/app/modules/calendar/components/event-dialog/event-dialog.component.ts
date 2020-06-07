@@ -14,12 +14,14 @@ export interface EventDialogData {
 })
 export class EventDialogComponent implements OnInit {
 
+  calendarEventId?: number;
+
   requestId: string;
+
   dialogTitle: string;
   isUpdateOnSave: boolean;
   isDeleteButtonVisible: boolean;
 
-  calendarEventId?: number;
   summary = new FormControl('', [Validators.required]);
   location = new FormControl('', [Validators.required]);
   startDate = new FormControl('', [Validators.required]);
@@ -36,14 +38,22 @@ export class EventDialogComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: EventDialogData,
     private calendarEventService: CalendarEventService) {
 
-    this.requestId = uuidv1();
     this.calendarEventId = data?.calendarEventId;
 
+    // Generate a unique GUID each time the dialog is opened
+    // (this is used to prevent certain actions from being executed twice
+    // if a user double clicks)
+    this.requestId = uuidv1();
+
     if (this.calendarEventId != null) {
+
+      // Calendar event ID supplied, context is editing an existing event
       this.dialogTitle = 'Edit Appointment';
       this.isUpdateOnSave = true;
       this.isDeleteButtonVisible = true;
 
+      // Retrieve the properties of the existing calendar event
+      // and load them in to the form
       this.calendarEventService
         .getCalendarEventForId(this.calendarEventId)
         .subscribe(event =>
@@ -53,9 +63,10 @@ export class EventDialogComponent implements OnInit {
             this.startDate.setValue(new Date(event.startDate));
             this.endDate.setValue(new Date(event.endDate));
           });
-
     }
     else {
+
+      // Calendar event ID not supplied, context is creating a new event
       this.dialogTitle = 'New Appointment';
       this.isUpdateOnSave = false;
       this.isDeleteButtonVisible = false;
@@ -65,6 +76,10 @@ export class EventDialogComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  /**
+   * Triggered when the user changes the start date. Ensures that
+   * the end date is not before the start date.
+   */
   onStartDateChanged(): void {
 
     // Force the end date to be cleared it if occurs before the start date
@@ -77,6 +92,11 @@ export class EventDialogComponent implements OnInit {
     }
   }
 
+  /**
+   * Triggered when the user clicks the save button. Ensures the correct
+   * action is being performed depending on whether a new record is being
+   * created or an existing record is being edited.
+   */
   onSaveClick(): void {
 
     if (this.isUpdateOnSave) {
@@ -97,6 +117,9 @@ export class EventDialogComponent implements OnInit {
     }
   }
 
+  /**
+   * Triggered when the user clicks the delete button.
+   */
   onDeleteClick(): void {
 
     this.calendarEventService.deleteCalendarEventForId(this.calendarEventId);

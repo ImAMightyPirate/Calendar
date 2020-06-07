@@ -17,6 +17,11 @@ export class CalendarDateComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  /**
+   * Determines whether the date should be hidden form the user interface
+   * (padding days exist so that real calendar days are correctly aligned based
+   * on the start of the week).
+   */
   isDayHidden(): boolean {
     return this.day.isPaddingDay;
   }
@@ -43,9 +48,14 @@ export class CalendarDateComponent implements OnInit {
     return '';
   }
 
+  /**
+   * Triggered when an event on the day is clicked by the user.
+   * @param calendarEventId The calender event ID of the clicked event.
+   */
   onEventClicked(calendarEventId: number): void {
 
-    const dialogRef = this.matDialog.open(
+    // Supply the ID of the calendar event to the dialog.
+    this.matDialog.open(
       EventDialogComponent,
       {
         data: { calendarEventId },

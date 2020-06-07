@@ -2,40 +2,15 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { DateService } from './date.service';
+import { EventDetailedResponse } from './../models/event-detailed.response';
+import { EventSummaryResponse } from './../models/event-summary.response';
+import { CreateEventRequest } from './../models/create-event.request';
+import { UpdateEventRequest } from './../models/update-event.request';
 
+/**
+ * Base URL for endpoint calls.
+ */
 const calendarEventsBaseUrl = 'https://localhost:5001/v1.0/calendar/events/';
-
-export interface EventSummaryResponse {
-  id: number;
-  summary: string;
-  location: string;
-  startDate: string;
-  endDate: string;
-}
-
-export interface EventDetailedResponse {
-  id: number;
-  summary: string;
-  location: string;
-  startDate: string;
-  endDate: string;
-  isDeleted: boolean;
-}
-
-export interface CreateEventRequest {
-  requestId: string;
-  summary: string;
-  location: string;
-  startDate: string;
-  endDate: string;
-}
-
-export interface UpdateEventRequest {
-  summary: string;
-  location: string;
-  startDate: string;
-  endDate: string;
-}
 
 @Injectable({
   providedIn: 'root'

@@ -9,3 +9,8 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; background-
 .mat-card-header-text {
   margin: 0 !important;
 }
+
+/* Override to ensure form fields use all available space by default */
+mat-form-field {
+  width: 100% !important;
+}

@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
-import { CalendarApiService, EventDetailedResponse, CreateEventRequest, UpdateEventRequest } from './calendar-api.service';
+import { CalendarApiService } from './calendar-api.service';
 import { DateService } from './date.service';
 import { MonthPickerService } from './month-picker.service';
 import { CalendarWeek } from '../models/calendar-week.model';
 import { CalendarEvent } from '../models/calendar-event.model';
+import { EventDetailedResponse } from './../models/event-detailed.response';
 import { Observable } from 'rxjs';
 
 @Injectable({
