@@ -21,6 +21,7 @@ namespace AmHaulage.WebApi.Controllers
         private readonly IEventDeleterService eventDeleterService;
         private readonly IEventReaderService eventReaderService;
         private readonly IEventUpdaterService eventUpdaterService;
+        private readonly IMonthReaderService monthReaderService;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="CalendarEventsController" /> class.
@@ -29,16 +30,19 @@ namespace AmHaulage.WebApi.Controllers
         /// <param name="eventDeleterService">The event deleter service.</param>
         /// <param name="eventReaderService">The event reader service.</param>
         /// <param name="eventUpdaterService">The event updater service.</param>
+        /// <param name="monthReaderService">The month reader service.</param>
         public CalendarEventsController(
             IEventCreatorService eventCreatorService,
             IEventDeleterService eventDeleterService,
             IEventReaderService eventReaderService,
-            IEventUpdaterService eventUpdaterService)
+            IEventUpdaterService eventUpdaterService,
+            IMonthReaderService monthReaderService)
         {
             this.eventCreatorService = eventCreatorService;
             this.eventDeleterService = eventDeleterService;
             this.eventReaderService = eventReaderService;
             this.eventUpdaterService = eventUpdaterService;
+            this.monthReaderService = monthReaderService;
         }
 
         /// <summary>
@@ -50,7 +54,7 @@ namespace AmHaulage.WebApi.Controllers
         [HttpGet("{year:int}/{month:int}")]
         public IEnumerable<EventSummaryResponse> GetEvents(int year, int month)
         {
-            var domainObjects = this.eventReaderService.GetCalendarEvents(year, month);
+            var domainObjects = this.monthReaderService.GetCalendarEvents(year, month);
             var responses = new List<EventSummaryResponse>();
 
             foreach (var obj in domainObjects)

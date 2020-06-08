@@ -18,13 +18,5 @@ namespace AmHaulage.Services.Contracts
         /// <returns>The calendar event.</returns>
         /// <exception cref="RecordNotFoundException">Thrown if no calendar event for the ID is found.</exception>
         CalendarEventDO GetCalendarEvent(long calendarEventId);
-
-        /// <summary>
-        /// Gets all calendar events within a month that have not been deleted.
-        /// </summary>
-        /// <param name="year">The year.</param>
-        /// <param name="month">The month (indexed by 1).</param>
-        /// <returns>The calendar events within the time period.</returns>
-        IEnumerable<CalendarEventDO> GetCalendarEvents(int year, int month);
     }
 }

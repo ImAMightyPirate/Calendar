@@ -55,6 +55,7 @@ namespace AmHaulage.WebApi
             services.AddSingleton<IEventDeleterService, EventDeleterService>();
             services.AddSingleton<IEventReaderService, EventReaderService>();
             services.AddSingleton<IEventUpdaterService, EventUpdaterService>();
+            services.AddSingleton<IMonthReaderService, MonthReaderService>();
 
             // Register services required to support API versioning
             services.AddCors(options =>

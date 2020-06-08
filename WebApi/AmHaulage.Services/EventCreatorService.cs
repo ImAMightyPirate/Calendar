@@ -44,7 +44,7 @@ namespace AmHaulage.Services
         /// <exception cref="DuplicateRequestException">Exception thrown when the request has been made multiple times.</exception>
         public void CreateCalendarEvent(CalendarEventDO calendarEvent)
         {
-             // Guards
+            // Guards
             EnsureArg.IsNotNull(calendarEvent, nameof(calendarEvent));
             this.calendarEventValidator.ValidateSummary(calendarEvent.Summary);
             this.calendarEventValidator.ValidateLocation(calendarEvent.Location);

@@ -65,44 +65,5 @@ namespace AmHaulage.Services
                 return this.calendarEventMapper.Map(record);
             }
         }
-
-        /// <summary>
-        /// Gets all calendar events within a month that have not been deleted.
-        /// </summary>
-        /// <param name="year">The year.</param>
-        /// <param name="month">The month (indexed by 1).</param>
-        /// <returns>The calendar events within the time period.</returns>
-        public IEnumerable<CalendarEventDO> GetCalendarEvents(int year, int month)
-        {
-            // GUards
-            EnsureArg.IsGte(month, 1, nameof(month));
-            EnsureArg.IsLte(month, 12, nameof(month));
-
-            var daysInMonth = DateTime.DaysInMonth(year, month);
-            var monthStartDate = new DateTime(year, month, 1);
-            var monthEndDate = new DateTime(year, month, daysInMonth);
-
-            using (var repo = this.repositoryFactory.Create())
-            {
-                var records = repo.CalendarEvents
-                    .Where(
-                        e =>
-                            e.IsDeleted == false && (
-
-                            /* Event starts within the month */
-                            (e.StartDate.Date >= monthStartDate.Date && e.StartDate.Date <= monthEndDate.Date) ||
-
-                            /* Event ends within the month */
-                            (e.EndDate.Date >= monthStartDate.Date && e.EndDate.Date <= monthEndDate.Date) ||
-
-                            /* Event spans the entire month */
-                            (e.StartDate.Date < monthStartDate.Date && e.EndDate.Date > monthEndDate.Date)));
-
-                foreach (var record in records)
-                {
-                    yield return this.calendarEventMapper.Map(record);
-                }
-            }
-        }
     }
 }
