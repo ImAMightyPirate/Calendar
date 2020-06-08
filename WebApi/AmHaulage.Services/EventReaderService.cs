@@ -6,10 +6,11 @@ namespace AmHaulage.Services
     using System.Collections.Generic;
     using System.Linq;
     using AmHaulage.DomainObjects;
-    using AmHaulage.Persistent.Contexts;
-    using AmHaulage.Persistent.Entities;
+    using AmHaulage.Persistence.Contracts;
+    using AmHaulage.Persistence.Contracts.Entities;
     using AmHaulage.Services.Contracts;
     using AmHaulage.Services.Contracts.Exceptions;
+    using AmHaulage.Services.Contracts.Mappers;
     using EnsureThat;
     using Microsoft.Extensions.Logging;
 
@@ -19,14 +20,23 @@ namespace AmHaulage.Services
     public class EventReaderService : IEventReaderService
     {
         private readonly ILogger logger;
+        private readonly IRepositoryFactory repositoryFactory;
+        private readonly ICalendarEventMapper calendarEventMapper;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="EventReaderService" /> class.
         /// </summary>
         /// <param name="logger">The ASP.NET Core logger.</param>
-        public EventReaderService(ILogger<EventReaderService> logger)
+        /// <param name="repositoryFactory">The repository factory.</param>
+        /// <param name="calendarEventMapper">The calendar event mapper.</param>
+        public EventReaderService(
+            ILogger<EventReaderService> logger,
+            IRepositoryFactory repositoryFactory,
+            ICalendarEventMapper calendarEventMapper)
         {
             this.logger = logger;
+            this.repositoryFactory = repositoryFactory;
+            this.calendarEventMapper = calendarEventMapper;
         }
 
         /// <summary>
@@ -37,11 +47,12 @@ namespace AmHaulage.Services
         /// <exception cref="RecordNotFoundException">Thrown if no calendar event for the ID is found.</exception>
         public CalendarEventDO GetCalendarEvent(long calendarEventId)
         {
+            // Guards
             EnsureArg.IsGte(calendarEventId, 1);
 
-            using (var context = new AmHaulageContext())
+            using (var repo = this.repositoryFactory.Create())
             {
-                var record = context.CalendarEvents
+                var record = repo.CalendarEvents
                     .Where(e => e.Id == calendarEventId)
                     .SingleOrDefault();
 
@@ -51,7 +62,7 @@ namespace AmHaulage.Services
                     throw new RecordNotFoundException();
                 }
 
-                return this.Map(record);
+                return this.calendarEventMapper.Map(record);
             }
         }
 
@@ -63,6 +74,7 @@ namespace AmHaulage.Services
         /// <returns>The calendar events within the time period.</returns>
         public IEnumerable<CalendarEventDO> GetCalendarEvents(int year, int month)
         {
+            // GUards
             EnsureArg.IsGte(month, 1, nameof(month));
             EnsureArg.IsLte(month, 12, nameof(month));
 
@@ -70,9 +82,9 @@ namespace AmHaulage.Services
             var monthStartDate = new DateTime(year, month, 1);
             var monthEndDate = new DateTime(year, month, daysInMonth);
 
-            using (var context = new AmHaulageContext())
+            using (var repo = this.repositoryFactory.Create())
             {
-                var records = context.CalendarEvents
+                var records = repo.CalendarEvents
                     .Where(
                         e =>
                             e.IsDeleted == false && (
@@ -88,23 +100,9 @@ namespace AmHaulage.Services
 
                 foreach (var record in records)
                 {
-                    yield return this.Map(record);
+                    yield return this.calendarEventMapper.Map(record);
                 }
             }
-        }
-
-        private CalendarEventDO Map(CalendarEvent record)
-        {
-                return new CalendarEventDO
-                {
-                    Id = record.Id,
-                    CreateRequestId = record.CreateRequestId,
-                    Summary = record.Summary,
-                    Location = record.Location,
-                    StartDate = record.StartDate,
-                    EndDate = record.EndDate,
-                    IsDeleted = record.IsDeleted,
-                };
         }
     }
 }

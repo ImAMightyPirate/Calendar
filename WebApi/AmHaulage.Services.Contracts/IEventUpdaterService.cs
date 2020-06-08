@@ -3,6 +3,7 @@
 namespace AmHaulage.Services.Contracts
 {
     using System;
+    using AmHaulage.Services.Contracts.Exceptions;
 
     /// <summary>
     /// Contract for the event updater service.

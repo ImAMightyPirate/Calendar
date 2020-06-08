@@ -3,8 +3,14 @@
 namespace AmHaulage.WebApi
 {
     using System.Diagnostics.CodeAnalysis;
+    using AmHaulage.Persistence;
+    using AmHaulage.Persistence.Contracts;
     using AmHaulage.Services;
     using AmHaulage.Services.Contracts;
+    using AmHaulage.Services.Contracts.Mappers;
+    using AmHaulage.Services.Contracts.Validators;
+    using AmHaulage.Services.Mappers;
+    using AmHaulage.Services.Validators;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Mvc.ApiExplorer;
@@ -42,6 +48,9 @@ namespace AmHaulage.WebApi
         /// <param name="services">The service collection.</param>
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddSingleton<IRepositoryFactory, RepositoryFactory>();
+            services.AddSingleton<ICalendarEventMapper, CalendarEventMapper>();
+            services.AddSingleton<ICalendarEventValidator, CalendarEventValidator>();
             services.AddSingleton<IEventCreatorService, EventCreatorService>();
             services.AddSingleton<IEventDeleterService, EventDeleterService>();
             services.AddSingleton<IEventReaderService, EventReaderService>();

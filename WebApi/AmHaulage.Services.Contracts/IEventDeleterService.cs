@@ -2,6 +2,8 @@
 
 namespace AmHaulage.Services.Contracts
 {
+    using AmHaulage.Services.Contracts.Exceptions;
+
     /// <summary>
     /// Contract for the event deleter service.
     /// </summary>

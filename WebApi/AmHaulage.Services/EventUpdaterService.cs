@@ -4,9 +4,10 @@ namespace AmHaulage.Services
 {
     using System;
     using System.Linq;
-    using AmHaulage.Persistent.Contexts;
+    using AmHaulage.Persistence.Contracts;
     using AmHaulage.Services.Contracts;
     using AmHaulage.Services.Contracts.Exceptions;
+    using AmHaulage.Services.Contracts.Validators;
     using Microsoft.Extensions.Logging;
 
     /// <summary>
@@ -15,14 +16,23 @@ namespace AmHaulage.Services
     public class EventUpdaterService : IEventUpdaterService
     {
         private readonly ILogger logger;
+        private readonly ICalendarEventValidator calendarEventValidator;
+        private readonly IRepositoryFactory repositoryFactory;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="EventUpdaterService" /> class.
         /// </summary>
         /// <param name="logger">The ASP.NET Core logger.</param>
-        public EventUpdaterService(ILogger<EventUpdaterService> logger)
+        /// <param name="calendarEventValidator">The calendar event validator.</param>
+        /// <param name="repositoryFactory">The repository factory.</param>
+        public EventUpdaterService(
+            ILogger<EventUpdaterService> logger,
+            ICalendarEventValidator calendarEventValidator,
+            IRepositoryFactory repositoryFactory)
         {
             this.logger = logger;
+            this.calendarEventValidator = calendarEventValidator;
+            this.repositoryFactory = repositoryFactory;
         }
 
         /// <summary>
@@ -41,9 +51,15 @@ namespace AmHaulage.Services
             DateTime startDate,
             DateTime endDate)
         {
-            using (var context = new AmHaulageContext())
+            // Guards
+            EnsureThat.EnsureArg.IsGte(calendarEventId, 1, nameof(calendarEventId));
+            this.calendarEventValidator.ValidateSummary(summary);
+            this.calendarEventValidator.ValidateLocation(location);
+            this.calendarEventValidator.ValidateDateRange(startDate, endDate);
+
+            using (var repo = this.repositoryFactory.Create())
             {
-                var record = context.CalendarEvents
+                var record = repo.CalendarEvents
                     .Where(
                         e =>
                             e.Id == calendarEventId &&
@@ -61,8 +77,8 @@ namespace AmHaulage.Services
                 record.StartDate = startDate.Date;
                 record.EndDate = endDate.Date;
 
-                context.Update(record);
-                context.SaveChanges();
+                repo.UpdateCalendarEvent(record);
+                repo.SaveChanges();
             }
 
             this.logger.LogInformation($"Calendar event with ID '{calendarEventId}' has been updated.");

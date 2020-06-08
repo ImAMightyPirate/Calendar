@@ -4,6 +4,7 @@
     <ProjectReference Include="..\AmHaulage.Services.Contracts\AmHaulage.Services.Contracts.csproj" />
     <ProjectReference Include="..\AmHaulage.Persistence\AmHaulage.Persistence.csproj" />
     <ProjectReference Include="..\AmHaulage.DomainObjects\AmHaulage.DomainObjects.csproj" />
+    <ProjectReference Include="..\AmHaulage.Persistence.Contracts\AmHaulage.Persistence.Contracts.csproj" />
   </ItemGroup>
 
   <PropertyGroup>

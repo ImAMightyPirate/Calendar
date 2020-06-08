@@ -3,7 +3,7 @@
 namespace AmHaulage.Services
 {
     using System.Linq;
-    using AmHaulage.Persistent.Contexts;
+    using AmHaulage.Persistence.Contracts;
     using AmHaulage.Services.Contracts;
     using AmHaulage.Services.Contracts.Exceptions;
     using EnsureThat;
@@ -15,14 +15,19 @@ namespace AmHaulage.Services
     public class EventDeleterService : IEventDeleterService
     {
         private readonly ILogger logger;
+        private readonly IRepositoryFactory repositoryFactory;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="EventDeleterService" /> class.
         /// </summary>
         /// <param name="logger">The ASP.NET Core logger.</param>
-        public EventDeleterService(ILogger<EventDeleterService> logger)
+        /// <param name="repositoryFactory">The repository factory.</param>
+        public EventDeleterService(
+            ILogger<EventDeleterService> logger,
+            IRepositoryFactory repositoryFactory)
         {
             this.logger = logger;
+            this.repositoryFactory = repositoryFactory;
         }
 
         /// <summary>
@@ -32,11 +37,12 @@ namespace AmHaulage.Services
         /// <exception cref="RecordNotFoundException">Exception thrown when calendar event for ID does not exist in the database.</exception>
         public void DeleteCalendarEvent(long calendarEventId)
         {
-            EnsureArg.IsGte(calendarEventId, 1);
+            // Guards
+            EnsureArg.IsGte(calendarEventId, 1, nameof(calendarEventId));
 
-            using (var context = new AmHaulageContext())
+            using (var repo = this.repositoryFactory.Create())
             {
-                var record = context.CalendarEvents
+                var record = repo.CalendarEvents
                     .Where(e => e.Id == calendarEventId)
                     .SingleOrDefault();
 
@@ -48,8 +54,8 @@ namespace AmHaulage.Services
 
                 record.IsDeleted = true;
 
-                context.Update(record);
-                context.SaveChanges();
+                repo.UpdateCalendarEvent(record);
+                repo.SaveChanges();
             }
 
             this.logger.LogInformation($"Calendar event with ID '{calendarEventId}' has been marked as deleted.");

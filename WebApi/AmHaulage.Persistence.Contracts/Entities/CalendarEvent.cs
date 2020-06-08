@@ -1,6 +1,6 @@
 // Copyright (c) Adam Mytton. All Rights Reserved.
 
-namespace AmHaulage.Persistent.Entities
+namespace AmHaulage.Persistence.Contracts.Entities
 {
     using System;
     using System.Diagnostics.CodeAnalysis;

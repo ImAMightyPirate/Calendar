@@ -4,6 +4,7 @@ namespace AmHaulage.Services.Contracts
 {
     using System.Collections.Generic;
     using AmHaulage.DomainObjects;
+    using AmHaulage.Services.Contracts.Exceptions;
 
     /// <summary>
     /// Contract for the event reader service.

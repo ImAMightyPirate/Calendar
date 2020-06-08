@@ -1,9 +1,9 @@
 // Copyright (c) Adam Mytton. All Rights Reserved.
 
-namespace AmHaulage.Persistent.Contexts
+namespace AmHaulage.Persistence.Contexts
 {
     using System.Diagnostics.CodeAnalysis;
-    using AmHaulage.Persistent.Entities;
+    using AmHaulage.Persistence.Contracts.Entities;
     using Microsoft.EntityFrameworkCore;
 
     /// <summary>
