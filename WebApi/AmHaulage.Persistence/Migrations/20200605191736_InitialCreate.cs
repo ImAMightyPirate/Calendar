@@ -3,11 +3,13 @@
 namespace AmHaulage.Persistence.Migrations
 {
     using System;
+    using System.Diagnostics.CodeAnalysis;
     using Microsoft.EntityFrameworkCore.Migrations;
 
     /// <summary>
     /// Migrations for the initial creation of the database.
     /// </summary>
+    [ExcludeFromCodeCoverage]
     public partial class InitialCreate : Migration
     {
         /// <summary>
