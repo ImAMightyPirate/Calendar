@@ -29,7 +29,7 @@ namespace AmHaulage.Persistence
         /// <summary>
         /// Gets the calendar events from the repository.
         /// </summary>
-        public IQueryable<CalendarEvent> CalendarEvents => this.CalendarEvents;
+        public IQueryable<CalendarEvent> CalendarEvents => this.context.CalendarEvents;
 
         /// <summary>
         /// Adds a calendar event to the repository.
