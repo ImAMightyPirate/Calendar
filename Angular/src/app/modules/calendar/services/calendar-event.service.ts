@@ -39,6 +39,7 @@ export class CalendarEventService {
               continue;
             }
 
+            // Add matching events to the calendar day
             for (const event of events) {
               if (this.isCalendarDateInRange(day.date, event.startDate, event.endDate)) {
                 const calendarEvent = new CalendarEvent();
@@ -140,6 +141,11 @@ export class CalendarEventService {
       });
   }
 
+  /**
+   * Gets the date as a formatted string in the format YYYY-MM-DD
+   * for transmission over JSON.
+   * @param date The date to convert.
+   */
   private getJsonDateStr(date: Date) {
 
     const year = date.getFullYear();
