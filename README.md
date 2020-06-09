@@ -1,3 +1,5 @@
+## Getting started
+
 The solution was developed using Visual Studio Code with the dotnet CLI and Angular (ng) CLI.
 
 To run the web API application:-
