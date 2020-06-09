@@ -6,5 +6,8 @@ To run the web API application:-
 To run the unit tests for the web API application:-
 `dotnet test /p:CollectCoverage=true`
 
-To run the Angular application:-
+Swagger can be used to view documentation for the available HTTP endpoints:-
+`https://localhost:5001/swagger/index.html`
+
+To run and open the Angular application:-
 `ng serve --open`
