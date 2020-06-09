@@ -2,7 +2,6 @@
 
 namespace AmHaulage.Persistence
 {
-    using System;
     using System.Diagnostics.CodeAnalysis;
     using System.Linq;
     using AmHaulage.Persistence.Contexts;
@@ -11,7 +10,7 @@ namespace AmHaulage.Persistence
 
     /// <summary>
     /// The repository class acts as a thin wrapper around the
-    /// EF Core database context so that it can be substituted 
+    /// EF Core database context so that it can be substituted
     /// with a mock in the unit tests.
     /// </summary>
     [ExcludeFromCodeCoverage]
