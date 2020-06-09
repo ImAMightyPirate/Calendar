@@ -6,10 +6,8 @@ namespace AmHaulage.Services.UnitTests
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
     using System.Linq;
-    using AmHaulage.DomainObjects;
     using AmHaulage.Persistence.Contracts;
     using AmHaulage.Persistence.Contracts.Entities;
-    using AmHaulage.Services.Contracts.Exceptions;
     using AmHaulage.Services.Contracts.Mappers;
     using Microsoft.Extensions.Logging;
     using Moq;
