@@ -7,9 +7,7 @@ namespace AmHaulage.Services
     using System.Linq;
     using AmHaulage.DomainObjects;
     using AmHaulage.Persistence.Contracts;
-    using AmHaulage.Persistence.Contracts.Entities;
     using AmHaulage.Services.Contracts;
-    using AmHaulage.Services.Contracts.Exceptions;
     using AmHaulage.Services.Contracts.Mappers;
     using EnsureThat;
     using Microsoft.Extensions.Logging;
