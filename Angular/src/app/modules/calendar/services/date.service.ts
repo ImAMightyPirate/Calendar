@@ -72,7 +72,7 @@ export class DateService {
    * Gets the number of days in a month.
    * @param date A date that falls within the month to be evaluated.
    */
-  private getNumberOfDaysInMonth(date: Date): number {
+  public getNumberOfDaysInMonth(date: Date): number {
     // Use day zero of the next month, this retrieves
     // the last day of the current month.
     // Note month + 1 always work because month 13 is

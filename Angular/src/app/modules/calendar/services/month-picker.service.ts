@@ -7,7 +7,14 @@ import { DateService } from './date.service';
 })
 export class MonthPickerService {
 
+  /**
+   * The active year.
+   */
   private activeYear: number;
+
+  /**
+   * The active month (indexed by 1).
+   */
   private activeMonth: number;
 
   private activeDateChangedSource = new Subject<Date>();

@@ -11,3 +11,6 @@ Swagger can be used to view documentation for the available HTTP endpoints:-
 
 To run and open the Angular application:-
 `ng serve --open`
+
+To run the unit tests for the Angular application:-
+`ng test`
