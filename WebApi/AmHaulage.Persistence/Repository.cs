@@ -10,7 +10,9 @@ namespace AmHaulage.Persistence
     using AmHaulage.Persistence.Contracts.Entities;
 
     /// <summary>
-    /// Repository that acts as a wrapper around the DB context.
+    /// The repository class acts as a thin wrapper around the
+    /// EF Core database context so that it can be substituted 
+    /// with a mock in the unit tests.
     /// </summary>
     [ExcludeFromCodeCoverage]
     public class Repository : IRepository
