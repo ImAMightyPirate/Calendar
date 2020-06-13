@@ -1,0 +1,16 @@
+@import './theme.scss';
+
+/* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; background-color: mat-color($candy-app-background); }
+
+/* Override the default material design margin on card header */
+.mat-card-header-text {
+  margin: 0 !important;
+}
+
+/* Override to ensure form fields use all available space by default */
+mat-form-field {
+  width: 100% !important;
+}

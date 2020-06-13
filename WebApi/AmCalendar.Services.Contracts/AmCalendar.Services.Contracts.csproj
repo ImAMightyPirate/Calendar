@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <ProjectReference Include="..\AmCalendar.DomainObjects\AmCalendar.DomainObjects.csproj" />
+    <ProjectReference Include="..\AmCalendar.Persistence.Contracts\AmCalendar.Persistence.Contracts.csproj" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+</Project>
