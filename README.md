@@ -19,6 +19,10 @@ To run the unit tests for the Angular application:-
 
 ## Stack
 
+Angular 9
+
 ASP.NET Core 3.1
+
 EF Core 3.1
+
 SQL Server
